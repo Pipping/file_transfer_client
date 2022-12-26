@@ -31,6 +31,7 @@ class Cli_sender extends Thread{
                     fn_index=4;
                     command="get";
                 }
+                
                 String filename=uinp;
                 System.out.println("filelengtsis: "+filename);
                 File file=new File(filename.substring(fn_index,filename.length()-3));
@@ -81,6 +82,21 @@ class Cli_sender extends Thread{
                     foup.close();
                     System.out.println("done");
 
+                }
+                else if(filename.equals("list")){
+                    
+                    to_server.writeBytes(filename);
+                    String content="";
+                    int byt=0;
+                    System.out.println("listing now");
+                    while((byt=from_server.read())!=-1){
+                        content+=(char)byt;
+                        if((char)byt==';')break;
+                        //System.out.println(content);
+                    }
+                    System.out.println("and voila now");
+                    System.out.print(content);
+                    
                 }
             }
 			 catch (Exception e) {
