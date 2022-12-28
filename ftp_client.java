@@ -21,8 +21,9 @@ class Cli_sender extends Thread{
                 System.out.println(uinp.substring(0, 4));
                 
                 String command="";
-                    
+                String filename=uinp;
                 int fn_index=0;
+                
                 if(uinp.substring(0, 4).equals("send")){
                     fn_index=5;
                     command="send";
@@ -31,10 +32,16 @@ class Cli_sender extends Thread{
                     fn_index=4;
                     command="get";
                 }
+                else if(filename.equals("list")){
+                    
+                }
+                else{
+                    System.out.println("wrong command input ,use \'get\' \'send\' or \'list\' ,get/send filename+end ,list is by itself");
+                }
                 
-                String filename=uinp;
-                System.out.println("filelengtsis: "+filename);
-                File file=new File(filename.substring(fn_index,filename.length()-3));
+                
+                
+                File file=new File(filename.substring(fn_index,filename.length()-1));
                 if(command.equals("send")){
                     
                     FileInputStream fin=new FileInputStream(file);
@@ -98,6 +105,7 @@ class Cli_sender extends Thread{
                     System.out.print(content);
                     
                 }
+                
             }
 			 catch (Exception e) {
 				// TODO: handle exception
